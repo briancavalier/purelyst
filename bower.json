@@ -1,0 +1,17 @@
+{
+  "name": "purelyst",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-console": "^1.0.0",
+    "purescript-prelude": "^1.0.0",
+    "purescript-eff": "^1.0.0",
+    "purescript-bifunctors": "^1.0.0",
+    "purescript-identity": "^1.0.0",
+    "purescript-tuples": "^1.0.0"
+  }
+}
