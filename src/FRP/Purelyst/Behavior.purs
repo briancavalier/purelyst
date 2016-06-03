@@ -1,16 +1,19 @@
 module FRP.Purelyst.Behavior where
 
-import Prelude((>>>), const)
+import Prelude((>>>), const, map, class Functor, class Show)
 import Data.Identity(Identity)
-import FRP.Purelyst.Reactive(Reactive(..), Step, stepper)
+import FRP.Purelyst.Reactive(Reactive, stepper) as R
 
-newtype Behavior t a = Behavior (Reactive Identity t a)
+newtype Behavior t a = Behavior (R.Reactive Identity t a)
 
 beh :: forall t a. (t -> a) -> Behavior t a
-beh = stepper >>> Behavior
-
-unbeh :: forall t a. Behavior t a -> (t -> Step Identity t a)
-unbeh (Behavior (Reactive r)) = r
+beh = R.stepper >>> Behavior
 
 always :: forall t a. a -> Behavior t a
 always a = beh (const a)
+
+instance showBehavior :: Show (Behavior t a) where
+  show _ = "Behavior" -- lame
+
+instance functorBehavior :: Functor (Behavior t) where
+  map f (Behavior r) = Behavior (map f r)
